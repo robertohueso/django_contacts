@@ -9,5 +9,5 @@ class Contact(models.Model):
     phone = models.CharField(max_length = 50)
     user_id = models.ForeignKey(User, verbose_name = "user_id")
 
-     def __str__(self):
+    def __str__(self):
         return "%s %s" % (self.firstname, self.lastname)
