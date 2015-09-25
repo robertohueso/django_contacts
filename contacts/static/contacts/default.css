@@ -1,0 +1,21 @@
+body {
+  background-color: #eee;
+}
+
+#login_button {
+  margin-top: 1em;
+}
+
+#login_box {
+  background-color: #FFF;
+  border-radius: 10px;
+  margin-top: 1em;
+  width: 30em;
+}
+
+#contacts_list {
+  margin-top: 2em;
+  padding-top: 1em;
+  border-radius: 10px;
+  background-color: #FFF;
+}

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import LoginForm
+from .models import Contact
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
@@ -36,8 +37,9 @@ def login_view(request):
 #Main application views
 @login_required(login_url = '/')
 def contacts_list_view(request):
-    username = request.user.username
+    user_id = request.user.id
+    list_of_contacts = Contact.objects.filter(user_id = user_id)
     context = {
-        'username': username,
+        'list_of_contacts': list_of_contacts,
     }
     return render(request, 'contacts/contacts_list.html', context)

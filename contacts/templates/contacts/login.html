@@ -1,5 +1,12 @@
-<form action="/" method="post">
-    {% csrf_token %}
-    {{ login_form }}
-    <input type="submit" value="Login" />
-</form>
+{% extends "contacts/base.html" %}
+{% block body %}
+<div class="container" id="login_box">
+  <form action="/" method="post">
+    <div class="form-group center-block">
+      {% csrf_token %}
+      {{ login_form }}
+      <input type="submit" class="btn btn-primary center-block" id="login_button" value="Login" />
+    </div>
+  </form>
+</div>
+{% endblock %}
