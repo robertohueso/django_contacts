@@ -4,6 +4,7 @@
 build/
 dist/
 *.sqlite3
+*/migrations/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
