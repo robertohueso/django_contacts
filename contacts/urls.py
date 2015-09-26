@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^$', views.login_view, name='login_view'),
     url(r'^contacts_list/', views.contacts_list_view, name='contacts_list_view'),
     url(r'^login_error/', views.login_error_view, name='login_error_view'),
+    url(r'^register/', views.register_view, name='register_view'),
 ]

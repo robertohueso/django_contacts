@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 from .models import Contact
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -33,6 +34,31 @@ def login_view(request):
         'login_form': login_form,
     }
     return render(request, 'contacts/login.html', context)
+
+def register_view(request):
+    if request.method == "POST":
+        register_form = RegisterForm(request.POST)
+        if register_form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            repeat_password = request.POST['repeat_password']
+            if (password == repeat_password) and (password is not None) and not (User.objects.filter(username=username).exists()):
+                user = User.objects.create_user(username, None, password)
+                if user is not None:
+                    user.save()
+                    return redirect('/')
+                else:
+                    return redirect('/login_error/')
+            else:
+                return redirect('/register/')
+        else:
+            return redirect('/register/')
+    else:
+        register_form = RegisterForm()
+    context = {
+        'register_form': register_form,
+    }
+    return render(request, 'contacts/register.html', context)
 
 #Main application views
 @login_required(login_url = '/')
