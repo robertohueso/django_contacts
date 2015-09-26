@@ -1,7 +1,19 @@
 {% extends "contacts/base.html" %}
 {% block body %}
   <div class="container table-responsive" id="contacts_list">
-    {% include "contacts/add_contact_modal.html" %}
+    <!-- Add contact modal -->
+    <button type="button" class="btn btn-primary pull-right" id="add_modal_toggle" data-toggle="modal" href="/add_contact_modal/" data-target="#add_modal">
+      Add contact
+    </button>
+
+    <div class="modal fade" id="add_modal" tabindex="-1" role="dialog" aria-labelledby="addModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+      </div>
+    </div>
+
+    <!-- List table -->
     <table class="table table-bordered table-hover table-striped">
       <thead>
         <tr>

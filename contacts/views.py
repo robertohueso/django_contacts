@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, NewContactForm
 from .models import Contact
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -69,3 +69,22 @@ def contacts_list_view(request):
         'list_of_contacts': list_of_contacts,
     }
     return render(request, 'contacts/contacts_list.html', context)
+
+@login_required(login_url = '/')
+def add_contact_view(request):
+    if request.method == "POST":
+        new_contact_form = NewContactForm(request.POST)
+        if new_contact_form.is_valid():
+            firstname = request.POST['firstname']
+            lastname = request.POST['lastname']
+            phone = request.POST['phone']
+            user_id = request.user
+            new_contact = Contact(firstname = firstname, lastname = lastname, phone = phone, user_id = user_id)
+            new_contact.save()
+            return redirect('/contacts_list/')
+    else:
+        new_contact_form = NewContactForm()
+    context = {
+        'new_contact_form': new_contact_form,
+    }
+    return render(request, 'contacts/add_contact_modal.html', context)
