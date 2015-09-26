@@ -19,3 +19,7 @@ body {
   border-radius: 10px;
   background-color: #FFF;
 }
+
+#add_modal_toggle {
+  margin-bottom: 1em;
+}
