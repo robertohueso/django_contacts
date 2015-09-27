@@ -19,8 +19,9 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.login_view, name='login_view'),
-    url(r'^contacts_list/', views.contacts_list_view, name='contacts_list_view'),
-    url(r'^login_error/', views.login_error_view, name='login_error_view'),
-    url(r'^register/', views.register_view, name='register_view'),
-    url(r'^add_contact_modal/', views.add_contact_view, name='add_contact_view'),
+    url(r'^contacts_list/$', views.contacts_list_view, name='contacts_list_view'),
+    url(r'^login_error/$', views.login_error_view, name='login_error_view'),
+    url(r'^register/$', views.register_view, name='register_view'),
+    url(r'^add_contact_modal/$', views.add_contact_view, name='add_contact_view'),
+    url(r'^contacts_list/detail/(?P<contact_id>[0-9]+)/$', views.contact_detail_view, name='contact_detail_view'),
 ]

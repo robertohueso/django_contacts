@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title">Contact details</h4>
+</div>
+<div class="modal-body">
+  <dl class="dl-horizontal">
+    <dt>First Name:</dt>
+    <dd>{{contact.firstname}}</dd>
+    <dt>Last Name:</dt>
+    <dd>{{contact.lastname}}</dd>
+    <dt>Phone:</dt>
+    <dd>{{contact.phone}}</dd>
+  </dl>
+</div>
+<div class="modal-footer">
+  <form action="/contacts_list/detail/{{contact.pk}}/" method="post">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Delete" name="delete_button"></button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  </form>
+</div>

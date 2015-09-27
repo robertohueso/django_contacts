@@ -88,3 +88,16 @@ def add_contact_view(request):
         'new_contact_form': new_contact_form,
     }
     return render(request, 'contacts/add_contact_modal.html', context)
+
+@login_required(login_url = '/')
+def contact_detail_view(request, contact_id):
+    contact = Contact.objects.get(pk = contact_id)
+    if request.method == "POST":
+        if request.POST.get("delete_button"):
+            contact.delete()
+            return redirect('/contacts_list/')
+    else:
+        context = {
+            'contact': contact,
+        }
+        return render(request, 'contacts/contact_detail_modal.html', context)

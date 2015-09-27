@@ -13,6 +13,14 @@
       </div>
     </div>
 
+    <!-- Contact detail modal -->
+    <div class="modal fade" id="detail_modal" tabindex="-1" role="dialog" aria-labelledby="detailModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" id="detail_modal_content">
+        </div>
+      </div>
+    </div>
+
     <!-- List table -->
     <table class="table table-bordered table-hover table-striped">
       <thead>
@@ -24,7 +32,7 @@
       </thead>
       <tbody>
         {% for contact in list_of_contacts %}
-        <tr>
+        <tr class="clickable-row" data-toggle="modal" data-href="/contacts_list/detail/{{ contact.pk }}" data-target="#detail_modal">
           <td> {{ contact.firstname }} </td>
           <td> {{ contact.lastname }} </td>
           <td> {{ contact.phone }} </td>
