@@ -4,6 +4,7 @@ from .models import Contact
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 
 # Create your views here.
 #Authentication related views
@@ -21,13 +22,15 @@ def login_view(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('/contacts_list/')
+                    return redirect(reverse('contacts:contacts_list_view'))
                 else:
-                    return redirect('/login_error/')
+                    return redirect(reverse('contacts:login_error_view'))
             else:
-                return redirect('/login_error/')
+                return redirect(reverse('contacts:login_error_view'))
         else:
-            return redirect('/login_error/')
+            return redirect(reverse('contacts:login_error_view'))
+    elif request.user.is_authenticated() and request.user.is_active:
+        return redirect(reverse('contacts:contacts_list_view'))
     else:
         login_form = LoginForm()
     context = {
@@ -48,11 +51,11 @@ def register_view(request):
                     user.save()
                     return redirect('/')
                 else:
-                    return redirect('/login_error/')
+                    return redirect(reverse('contacts:login_error_view'))
             else:
-                return redirect('/register/')
+                return redirect(reverse('contacts:register_view'))
         else:
-            return redirect('/register/')
+            return redirect(reverse('contacts:register_view'))
     else:
         register_form = RegisterForm()
     context = {
@@ -81,7 +84,7 @@ def add_contact_view(request):
             user_id = request.user
             new_contact = Contact(firstname = firstname, lastname = lastname, phone = phone, user_id = user_id)
             new_contact.save()
-            return redirect('/contacts_list/')
+            return redirect(reverse('contacts:contacts_list_view'))
     else:
         new_contact_form = NewContactForm()
     context = {
@@ -95,7 +98,7 @@ def contact_detail_view(request, contact_id):
     if request.method == "POST":
         if request.POST.get("delete_button"):
             contact.delete()
-            return redirect('/contacts_list/')
+            return redirect(reverse('contacts:contacts_list_view'))
     else:
         context = {
             'contact': contact,

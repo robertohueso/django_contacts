@@ -1,11 +1,17 @@
 {% extends "contacts/base.html" %}
 {% block body %}
   <div class="container table-responsive" id="contacts_list">
-    <!-- Add contact modal -->
+
+    <!-- Top controls -->
+    <a type="button" class="btn btn-default" href="/logout/">
+      Logout
+    </a>
+    
     <button type="button" class="btn btn-primary pull-right" id="add_modal_toggle" data-toggle="modal" href="/add_contact_modal/" data-target="#add_modal">
       Add contact
     </button>
 
+    <!-- Add contact modal -->
     <div class="modal fade" id="add_modal" tabindex="-1" role="dialog" aria-labelledby="addModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

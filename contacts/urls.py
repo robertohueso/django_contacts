@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import url
+from django.core.urlresolvers import reverse
 from . import views
 
 
@@ -24,4 +25,5 @@ urlpatterns = [
     url(r'^register/$', views.register_view, name='register_view'),
     url(r'^add_contact_modal/$', views.add_contact_view, name='add_contact_view'),
     url(r'^contacts_list/detail/(?P<contact_id>[0-9]+)/$', views.contact_detail_view, name='contact_detail_view'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout_view'),
 ]
