@@ -95,12 +95,15 @@ def add_contact_view(request):
 @login_required(login_url = '/')
 def contact_detail_view(request, contact_id):
     contact = Contact.objects.get(pk = contact_id)
-    if request.method == "POST":
-        if request.POST.get("delete_button"):
-            contact.delete()
-            return redirect(reverse('contacts:contacts_list_view'))
+    if contact.user_id == request.user:
+        if request.method == "POST":
+            if request.POST.get("delete_button"):
+                contact.delete()
+                return redirect(reverse('contacts:contacts_list_view'))
+        else:
+            context = {
+                'contact': contact,
+            }
+            return render(request, 'contacts/contact_detail_modal.html', context)
     else:
-        context = {
-            'contact': contact,
-        }
-        return render(request, 'contacts/contact_detail_modal.html', context)
+        return redirect(reverse('contacts:login_error_view'))
